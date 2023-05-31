@@ -1,12 +1,12 @@
-import React, { useState, createContext, useContext } from "react";
+import { createContext, useContext, useState } from "react";
 
-const AppContext = createContext(null);
+const AppContext = createContext();
 
 export const Parent = () => {
-  const [userName, setUserName] = useState("PedroTech");
+  const [userName, setUserName] = useState("SangyK");
 
   return (
-    <AppContext.Provider value={{ userName, setUserName }}>
+    <AppContext.Provider>
       <div>
         {userName}
         <Child />
@@ -16,16 +16,21 @@ export const Parent = () => {
 };
 
 export const Child = () => {
-  return <Grandchild />;
+  return (
+    <div>
+      <Grandchild1 />
+      <Grandchild2 />
+    </div>
+  );
 };
 
-export const Grandchild = () => {
+export const Grandchild1 = () => {
   const { setUserName } = useContext(AppContext);
   return (
     <div>
       <button
         onClick={() => {
-          setUserName("PedroTechnologies");
+          setUserName("SK Technologies");
         }}
       >
         Change Username
@@ -33,3 +38,12 @@ export const Grandchild = () => {
     </div>
   );
 };
+
+export const Grandchild2 = () => {
+  const { userName } = useContext(AppContext);
+  return (
+    <div>
+      {userName}
+    </div>
+  )
+}
